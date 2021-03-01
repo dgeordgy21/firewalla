@@ -21,12 +21,12 @@ function install_dependencies()
 
     # TODO: check local apt mirror
     echo "Installing node source repository..."
-    sudo  curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -   || perr_and_exit "Failed to install node source repo"
+    curl -fsSL https://deb.nodesource.com/setup_12.x | sudo -E bash -   || perr_and_exit "Failed to install node source repo"
 
     echo "Executing apt-get update, please be patient..."
     sudo apt-get update   || perr_and_exit "apt-get update failed."
 
-    apt_pkg_list="net-tools curl redis-server iptables ca-certificates nmap dsniff bluetooth bluez libbluetooth-dev libudev-dev nodejs openvpn easy-rsa python-pip cron"
+    apt_pkg_list="net-tools curl redis-server iptables ca-certificates nmap dsniff bluetooth bluez libbluetooth-dev libudev-dev nodejs openvpn easy-rsa python3-pip cron"
 
     echo "Installing dependencies, please be patient..."
     sudo apt-get install $apt_pkg_list -y || perr_and_exit "Failed to install needed packages."
@@ -51,7 +51,7 @@ function install_dependencies()
     sudo cp -r /usr/share/easy-rsa /etc/openvpn || perr_and_exit "Failed to copy easy_rsa."
 
     echo "Installing shadowsocks..."
-    sudo pip install shadowsocks || perr_and_exit "Failed to install shadowsocks."
+    sudo pip3 install shadowsocks || perr_and_exit "Failed to install shadowsocks."
 }
 
 function install_walla()
